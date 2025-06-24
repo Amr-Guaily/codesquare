@@ -1,0 +1,29 @@
+export interface User {
+  id: string;
+  firstName: string;
+  lastName: string;
+  password: string;
+  email: string;
+  userName: string;
+}
+
+export interface Post {
+  id: string;
+  title: string;
+  url: string;
+  userId: string;
+  postedAt: number;
+}
+
+export interface Like {
+  userId: string;
+  postId: string;
+}
+
+export interface Comments {
+  id: string;
+  userId: string;
+  postId: string;
+  comment: string;
+  postedAt: number;
+}
