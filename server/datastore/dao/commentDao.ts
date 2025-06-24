@@ -1,5 +1,7 @@
+import { Comment } from '../../types';
+
 export interface CommentDAO {
   createComment(comment: Comment): void;
   deleteComment(id: string): void;
-  listComments(userId: string): Comment[];
+  listComments(postId: string): Comment[];
 }

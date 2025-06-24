@@ -20,7 +20,7 @@ export interface Like {
   postId: string;
 }
 
-export interface Comments {
+export interface Comment {
   id: string;
   userId: string;
   postId: string;
