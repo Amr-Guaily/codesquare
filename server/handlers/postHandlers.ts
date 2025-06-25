@@ -1,14 +1,6 @@
 import crypto from 'crypto';
-import { RequestHandler } from 'express';
 import { db } from '../datastore';
-import { Post } from '../types';
-
-export type ExpressHandler<Req, Res> = RequestHandler<
-  string,
-  Partial<Res>,
-  Partial<Req>,
-  any
->;
+import { ExpressHandler, Post } from '../types';
 
 export const listPostHandler: ExpressHandler<{}, {}> = (req, res) => {
   // TODO: handle filters and pagination
@@ -16,12 +8,11 @@ export const listPostHandler: ExpressHandler<{}, {}> = (req, res) => {
 };
 
 type CreatePostRequest = Pick<Post, 'title' | 'url' | 'userId'>;
-interface CreatePostResponse {}
 
-export const createPostHandler: ExpressHandler<
-  CreatePostRequest,
-  CreatePostResponse
-> = (req, res) => {
+export const createPostHandler: ExpressHandler<CreatePostRequest, {}> = (
+  req,
+  res
+) => {
   if (!req.body.title || !req.body.url || !req.body.userId) {
     res.sendStatus(400);
     return;
