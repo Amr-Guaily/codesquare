@@ -1,18 +1,25 @@
 import crypto from 'crypto';
+import {
+  CreatePostRequest,
+  CreatePostResponse,
+  ListPostRequest,
+  ListPostResponse,
+} from '../api';
 import { db } from '../datastore';
 import { ExpressHandler, Post } from '../types';
 
-export const listPostHandler: ExpressHandler<{}, {}> = (req, res) => {
+export const listPostHandler: ExpressHandler<
+  ListPostRequest,
+  ListPostResponse
+> = (req, res) => {
   // TODO: handle filters and pagination
   res.send({ posts: db.listPosts() });
 };
 
-type CreatePostRequest = Pick<Post, 'title' | 'url' | 'userId'>;
-
-export const createPostHandler: ExpressHandler<CreatePostRequest, {}> = (
-  req,
-  res
-) => {
+export const createPostHandler: ExpressHandler<
+  CreatePostRequest,
+  CreatePostResponse
+> = (req, res) => {
   if (!req.body.title || !req.body.url || !req.body.userId) {
     res.sendStatus(400);
     return;
