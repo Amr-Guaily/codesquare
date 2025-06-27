@@ -17,6 +17,8 @@ export const createPostHandler: ExpressHandler<CreatePostRequest, CreatePostResp
     return;
   }
 
+  // TODO: validate user exists
+  // TODO: validate url is new, otherwise add +1 to existing post
   const post: Post = {
     id: crypto.randomUUID(),
     title: req.body.title,
