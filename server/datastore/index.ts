@@ -6,4 +6,9 @@ import { InMemoryDatastore } from './memorydb';
 
 export interface Datastore extends PostsDAO, LikeDAO, UserDAO, CommentDAO {}
 
-export const db = new InMemoryDatastore();
+export let db: Datastore;
+
+export async function initDb() {
+  db = new InMemoryDatastore();
+}
+
