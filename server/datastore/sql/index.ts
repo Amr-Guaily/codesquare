@@ -1,7 +1,25 @@
+import { open as sqliteOpen } from 'sqlite';
+import sqlite3 from 'sqlite3';
+
+import path from 'path';
 import { Datastore } from '..';
 import { Comment, Like, Post, User } from '../../types';
 
 class SqlDatastore implements Datastore {
+  public async connect() {
+    // open the database
+    const db = await sqliteOpen({
+      filename: path.join(__dirname, 'codersquare.sqlite'),
+      driver: sqlite3.Database,
+    });
+
+    await db.migrate({
+      migrationsPath: path.join(__dirname, 'migrations'),
+    });
+
+    return this;
+  }
+
   listPosts(): Promise<Post[]> {
     throw new Error('Method not implemented.');
   }
