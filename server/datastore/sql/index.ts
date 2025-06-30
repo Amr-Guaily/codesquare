@@ -5,7 +5,7 @@ import path from 'path';
 import { Datastore } from '..';
 import { Comment, Like, Post, User } from '../../types';
 
-class SqlDatastore implements Datastore {
+export class SqlDatastore implements Datastore {
   public async connect() {
     // open the database
     const db = await sqliteOpen({
