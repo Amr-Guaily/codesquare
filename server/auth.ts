@@ -2,7 +2,9 @@ import jwt from 'jsonwebtoken';
 import { JwtObject } from './types';
 
 export function signJwt(obj: JwtObject): string {
-  return jwt.sign(obj, getJwtSecret());
+  return jwt.sign(obj, getJwtSecret(), {
+    expiresIn: '14d',
+  });
 }
 
 export function verifyJwt(token: string): JwtObject {

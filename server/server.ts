@@ -3,6 +3,7 @@ import express from 'express';
 import { initDb } from './datastore';
 import { signInHandler, signUpHandler } from './handlers/authHandler';
 import { createPostHandler, listPostHandler } from './handlers/postHandler';
+import { authMiddleware } from './middleware/authMiddleware';
 import { errHandler } from './middleware/errorMiddleware';
 import { requestLoggerMiddleware } from './middleware/loggerMiddleware';
 
@@ -16,11 +17,15 @@ import { requestLoggerMiddleware } from './middleware/loggerMiddleware';
 
   app.use(requestLoggerMiddleware);
 
-  app.get('/v1/posts', listPostHandler);
-  app.post('/v1/posts', createPostHandler);
-
+  // Public endpoints
   app.post('/v1/signup', signUpHandler);
   app.post('/v1/signin', signInHandler);
+
+  app.use(authMiddleware);
+
+  // Protected endpoints
+  app.get('/v1/posts', authMiddleware, listPostHandler);
+  app.post('/v1/posts', authMiddleware, createPostHandler);
 
   app.use(errHandler);
 
