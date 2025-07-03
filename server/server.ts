@@ -1,3 +1,4 @@
+import dotenv from 'dotenv';
 import express from 'express';
 import { initDb } from './datastore';
 import { signInHandler, signUpHandler } from './handlers/authHandler';
@@ -7,6 +8,7 @@ import { requestLoggerMiddleware } from './middleware/loggerMiddleware';
 
 (async () => {
   await initDb();
+  dotenv.config();
 
   const app = express();
 
