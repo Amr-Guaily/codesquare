@@ -1,6 +1,7 @@
 import express, { ErrorRequestHandler, RequestHandler } from 'express';
 import { initDb } from './datastore';
-import { createPostHandler, listPostHandler } from './handlers/postHandlers';
+import { createPostHandler, listPostHandler } from './handlers/postHandler';
+import { signInHandler, signUpHandler } from './handlers/userHandler';
 
 (async () => {
   await initDb();
@@ -16,8 +17,11 @@ import { createPostHandler, listPostHandler } from './handlers/postHandlers';
 
   app.use(requestLoggerMiddleware);
 
-  app.get('/posts', listPostHandler);
-  app.post('/posts', createPostHandler);
+  app.get('/v1/posts', listPostHandler);
+  app.post('/v1/posts', createPostHandler);
+
+  app.post('/v1/signup', signUpHandler);
+  app.post('/v1/signin', signInHandler);
 
   const errHandler: ErrorRequestHandler = (err, req, res, next) => {
     console.error('Uncaught exception', err);
