@@ -30,7 +30,14 @@ export interface Comment {
   postedAt: number;
 }
 
-export type ExpressHandler<Req, Res> = RequestHandler<string, Partial<Res>, Partial<Req>, any>;
+type WithError<T> = T & { error: string };
+
+export type ExpressHandler<Req, Res> = RequestHandler<
+  string,
+  Partial<WithError<Res>>,
+  Partial<WithError<Req>>,
+  any
+>;
 
 export interface JwtObject {
   userId: string;
