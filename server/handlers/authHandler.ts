@@ -24,7 +24,7 @@ export const signUpHandler: ExpressHandler<SignUpRequest, SignUpResponse> = asyn
     firstName,
     lastName,
     userName,
-    password,
+    password: hashPassword(password),
     email,
   };
 
@@ -45,7 +45,7 @@ export const signInHandler: ExpressHandler<SignInRequest, SignInResponse> = asyn
 
   const existing = (await db.getUserByEmail(login)) || (await db.getUserByUsername(login));
 
-  if (!existing || existing.password !== password) {
+  if (!existing || existing.password !== hashPassword(password)) {
     res.sendStatus(403);
     return;
   }
@@ -63,3 +63,11 @@ export const signInHandler: ExpressHandler<SignInRequest, SignInResponse> = asyn
     jwt,
   });
 };
+
+function hashPassword(password: string): string {
+  const passwordHash = crypto
+    .pbkdf2Sync(password, process.env.PASSWORD_SALT!, 42, 64, 'sha512')
+    .toString('hex');
+
+  return passwordHash;
+}

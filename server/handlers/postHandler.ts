@@ -15,7 +15,7 @@ export const createPostHandler: ExpressHandler<CreatePostRequest, CreatePostResp
   req,
   res
 ) => {
-  if (!req.body.title || !req.body.url || !req.body.userId) {
+  if (!req.body.title || !req.body.url) {
     res.sendStatus(400);
     return;
   }
@@ -26,8 +26,8 @@ export const createPostHandler: ExpressHandler<CreatePostRequest, CreatePostResp
     id: crypto.randomUUID(),
     title: req.body.title,
     url: req.body.url,
-    userId: req.body.userId,
     postedAt: Date.now(),
+    userId: res.locals.userId,
   };
 
   await db.createPost(post);
