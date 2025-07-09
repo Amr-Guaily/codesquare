@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server.ts",
-    "start:prod": "pm2 delete codersquare 2>nul & pm2 start server.ts --name codersquare --interpreter ./node_modules/.bin/ts-node -- --transpile-only"
+    "start:prod": "pm2 delete codersquare 2>nul & pm2 start ecosystem.config.js"
   },
   "keywords": [],
   "author": "",
