@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.ts"
+    "start": "nodemon server.ts",
+    "start:prod": "pm2 delete codersquare 2>nul & pm2 start server.ts --name codersquare --interpreter ./node_modules/.bin/ts-node -- --transpile-only"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +14,7 @@
     "dotenv": "^17.0.1",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
+    "pm2": "^6.0.8",
     "sqlite": "^5.1.1",
     "sqlite3": "^5.1.7"
   },
