@@ -28,8 +28,8 @@ import { requestLoggerMiddleware } from './middleware/loggerMiddleware';
   app.use(authMiddleware);
 
   // Protected endpoints
-  app.get('/v1/posts', authMiddleware, listPostHandler);
-  app.post('/v1/posts', authMiddleware, createPostHandler);
+  app.get('/v1/posts', listPostHandler);
+  app.post('/v1/posts', createPostHandler);
 
   app.use(errHandler);
 

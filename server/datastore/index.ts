@@ -6,7 +6,7 @@ import { SqlDatastore } from './sql';
 
 export interface Datastore extends PostsDAO, LikeDAO, UserDAO, CommentDAO {}
 
-export let db: Datastore;
+export let db: Datastore; // Singleton - holds the instance returned by `SqlDatastore().connect()`.
 
 export async function initDb() {
   db = await new SqlDatastore().connect();
