@@ -1,0 +1,19 @@
+name: gcp-deployer
+
+on:
+  push:
+    branches: [ deploy-prod ]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Deploy and restart web server
+        run: |
+          cd server
+          npm install
+          PORT=3000 ENV=production JWT_SECRET=568748d53b70295014b9795406a931250840c837725c27ea4e3e5bbad448b9ea78544373514ecaa77b8d4d147840699ba800c541d1bfdc5d2e75c11ac23376aa PASSWORD_SALT=60186f18478537834550b31f9f3f3d9599afc0a15c5542e7b742693f98427ccb381b2e15b89289b4a5d862dbd03079d5a3825bc998f531fbe83426693874ff85 npm start:prod
+      
+    
