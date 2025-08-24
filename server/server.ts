@@ -19,7 +19,7 @@ import { requestLoggerMiddleware } from './middleware/loggerMiddleware';
 
   // Public endpoints
   app.get('/healthz', (req, res) => {
-    res.send({ status: '✌️' });
+    res.send({ status: 'OK' });
   });
 
   app.post('/v1/signup', signUpHandler);
