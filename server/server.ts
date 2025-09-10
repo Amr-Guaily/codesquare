@@ -33,8 +33,6 @@ import { requestLoggerMiddleware } from './middleware/loggerMiddleware';
 
   app.use(errHandler);
 
-  console.log(`jwt secret: ${process.env.JWT_SECRET}`);
-  console.log(`password salt: ${process.env.PASSWORD_SALT}`);
   app.listen(process.env.PORT || 3000, () => {
     console.log(`Server is running on port ${process.env.PORT || 3000}`);
   });
